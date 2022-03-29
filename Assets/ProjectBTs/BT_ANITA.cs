@@ -37,7 +37,7 @@ public class BT_ANITA : BehaviourTree
             new Sequence(
                 new ACTION_Deactivate("theBroom"),
                 new ACTION_Deactivate("theNotes"),
-                new ACTION_TellEngaged("10","2"),
+                new ACTION_Utter("10"),
                 new ACTION_Arrive("theFrontOfDesk"),
                 new BT_SeeToCustomer()
                 )
@@ -67,7 +67,13 @@ public class BT_SweepAndSing: BehaviourTree
 
     }
     public override void OnConstruction()
-    { 
+    {
+        root = new Sequence(
+            new ACTION_ClearUtterance(),
+            new ACTION_Activate("theBroom"),
+            new ACTION_Activate("theNotes"),
+            new ACTION_WanderAround("theSweepingPoint","0.4")//REVISAR QUE PUNTO Y QUE PESO SE DEBE PONER <==================================================================
+            ) ;
     }
 
 }
