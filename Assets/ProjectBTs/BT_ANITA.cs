@@ -56,7 +56,21 @@ public class BT_SeeToCustomer : BehaviourTree
 
     }
     public override void OnConstruction()
-    { 
+    {
+        root = new Sequence(
+            new ACTION_EngageInDialog("partner"),
+            new ACTION_AskEngaged("11","2","answer"),//revisar si los parametros que hay que pasar son estos<====================================================
+            new Selector(
+                new Sequence(
+                    new ACTION_ParseAnswer("answer","product"),//revisar, creo que es esto ???=================================
+                    new ACTION_TellEngaged("13","2"),
+                    new BT_SELL_PRODUCT()
+                    ),
+                new ACTION_TellEngaged("12", "2")//Apologize
+                ),
+            new ACTION_DisengageFromDialog()
+            );
+
     }
 
 }
@@ -76,4 +90,21 @@ public class BT_SweepAndSing: BehaviourTree
             ) ;
     }
 
+}
+
+public class BT_SELL_PRODUCT : BehaviourTree
+{
+    public BT_SELL_PRODUCT() { }
+    public override void OnConstruction()
+    {
+        root = new Selector(
+            new Sequence(
+                new CONDITION_CheckExistences("product"),
+                new ACTION_Sell("product"),
+                new ACTION_TellEngaged("14", "2")//here you have
+                ),
+             new ACTION_TellEngaged("12", "2")//Apologize
+
+            );
+    }
 }
