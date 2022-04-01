@@ -33,7 +33,7 @@ public class BT_ANITA : BehaviourTree
       */
         root = new DynamicSelector();
         root.AddChild(
-            new CONDITION_CustomerInStore(),
+            new CONDITION_CustomerInStore("theCustomer"),
             new Sequence(
                 new ACTION_Deactivate("theBroom"),
                 new ACTION_Deactivate("theNotes"),
@@ -45,7 +45,6 @@ public class BT_ANITA : BehaviourTree
         root.AddChild(
             new CONDITION_AlwaysTrue(),
             new BT_SweepAndSing()
-
             );
     }
 }
@@ -58,17 +57,18 @@ public class BT_SeeToCustomer : BehaviourTree
     public override void OnConstruction()
     {
         root = new Sequence(
-            new ACTION_EngageInDialog("partner"),
-            new ACTION_AskEngaged("11","2","answer"),//revisar si los parametros que hay que pasar son estos<====================================================
+            new ACTION_EngageInDialog("theCustomer"),
+            new ACTION_AskEngaged("11","2","theAnswer"),//revisar si los parametros que hay que pasar son estos<====================================================
             new Selector(
                 new Sequence(
-                    new ACTION_ParseAnswer("answer","product"),//revisar, creo que es esto ???=================================
+                    new ACTION_ParseAnswer("theAnswer", "theProduct"),//revisar, creo que es esto ???=================================
                     new ACTION_TellEngaged("13","2"),
                     new BT_SELL_PRODUCT()
                     ),
                 new ACTION_TellEngaged("12", "2")//Apologize
                 ),
-            new ACTION_DisengageFromDialog()
+            new ACTION_DisengageFromDialog(),
+            new ACTION_DebugLog("")
             );
 
     }
@@ -86,8 +86,8 @@ public class BT_SweepAndSing: BehaviourTree
             new ACTION_ClearUtterance(),
             new ACTION_Activate("theBroom"),
             new ACTION_Activate("theNotes"),
-            new ACTION_WanderAround("theSweepingPoint","0.4")//REVISAR QUE PUNTO Y QUE PESO SE DEBE PONER <==================================================================
-            ) ;
+            new ACTION_WanderAround("theSweepingPoint","0.5")//REVISAR QUE PUNTO Y QUE PESO SE DEBE PONER <==================================================================
+            );
     }
 
 }
@@ -99,12 +99,12 @@ public class BT_SELL_PRODUCT : BehaviourTree
     {
         root = new Selector(
             new Sequence(
-                new CONDITION_CheckExistences("product"),
-                new ACTION_Sell("product"),
-                new ACTION_TellEngaged("14", "2")//here you have
+                new CONDITION_CheckExistences("theProduct"),
+                new ACTION_Sell("theProduct"),
+                new ACTION_TellEngaged("14", "2")//here you have                
                 ),
-             new ACTION_TellEngaged("12", "2")//Apologize
-
+             new ACTION_TellEngaged("12", "2")//Apologize           
+             
             );
     }
 }
