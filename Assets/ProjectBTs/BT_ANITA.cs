@@ -80,8 +80,8 @@ public class BT_SeeToCustomer : BehaviourTree
                     ),
                 new ACTION_TellEngaged("12", "2")//Apologize
                 ),
-            new ACTION_DisengageFromDialog(),
-            new ACTION_DebugLog("")
+            new ACTION_DisengageFromDialog(), 
+            new ACTION_ClearUtterance()
             );
 
     }
