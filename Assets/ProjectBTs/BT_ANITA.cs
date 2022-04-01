@@ -15,11 +15,12 @@ public class BT_ANITA : BehaviourTree
        public string keyoutObject 
      */
 
-     // construtor
-    public BT_ANITA()  { 
+    // construtor
+    public BT_ANITA()
+    {
         /* Receive BT parameters and set them. Remember all are of type string */
     }
-    
+
     public override void OnConstruction()
     {
         /* Write here (method OnConstruction) the code that constructs the Behaviour Tree 
@@ -31,9 +32,9 @@ public class BT_ANITA : BehaviourTree
 
           A behaviour tree can use other behaviour trees.  
       */
-        root = new DynamicSelector();
+        root = new DynamicSelector();        
         root.AddChild(
-            new CONDITION_CustomerInStore("theCustomer"),            
+            new CONDITION_CustomerInStore("theCustomer"),
             new Sequence(
                 new ACTION_Deactivate("theBroom"),
                 new ACTION_Deactivate("theNotes"),
@@ -41,11 +42,23 @@ public class BT_ANITA : BehaviourTree
                 new ACTION_Arrive("theFrontOfDesk"),
                 new BT_SeeToCustomer()
                 )
-            ) ;
+            );
+        root.AddChild(
+         new CONDITION_NoMoreFruit(),
+         new Sequence(
+             //new CONDITION_CheckExistences("apples"),
+             new ACTION_ClearUtterance(),
+             new ACTION_Arrive("theRestockPoint", "20"),
+             new ACTION_ReStock(),
+             new ACTION_DebugLog("saliendo?")
+             )
+         );
         root.AddChild(
             new CONDITION_AlwaysTrue(),
             new BT_SweepAndSing()
             );
+       
+
     }
 }
 public class BT_SeeToCustomer : BehaviourTree
@@ -58,11 +71,11 @@ public class BT_SeeToCustomer : BehaviourTree
     {
         root = new Sequence(
             new ACTION_EngageInDialog("theCustomer"),
-            new ACTION_AskEngaged("11","2","theAnswer"),//revisar si los parametros que hay que pasar son estos<====================================================
+            new ACTION_AskEngaged("11", "2", "theAnswer"),//revisar si los parametros que hay que pasar son estos<====================================================
             new Selector(
                 new Sequence(
                     new ACTION_ParseAnswer("theAnswer", "theProduct"),//revisar, creo que es esto ???=================================
-                    new ACTION_TellEngaged("13","2"),
+                    new ACTION_TellEngaged("13", "2"),
                     new BT_SELL_PRODUCT()
                     ),
                 new ACTION_TellEngaged("12", "2")//Apologize
@@ -74,7 +87,7 @@ public class BT_SeeToCustomer : BehaviourTree
     }
 
 }
-public class BT_SweepAndSing: BehaviourTree
+public class BT_SweepAndSing : BehaviourTree
 {
     public BT_SweepAndSing()
     {
@@ -86,7 +99,7 @@ public class BT_SweepAndSing: BehaviourTree
             new ACTION_ClearUtterance(),
             new ACTION_Activate("theBroom"),
             new ACTION_Activate("theNotes"),
-            new ACTION_WanderAround("theSweepingPoint","0.5")//REVISAR QUE PUNTO Y QUE PESO SE DEBE PONER <==================================================================
+            new ACTION_WanderAround("theSweepingPoint", "0.5")//REVISAR QUE PUNTO Y QUE PESO SE DEBE PONER <==================================================================
             );
     }
 
@@ -104,7 +117,7 @@ public class BT_SELL_PRODUCT : BehaviourTree
                 new ACTION_TellEngaged("14", "2")//here you have                
                 ),
              new ACTION_TellEngaged("12", "2")//Apologize           
-             
+
             );
     }
 }

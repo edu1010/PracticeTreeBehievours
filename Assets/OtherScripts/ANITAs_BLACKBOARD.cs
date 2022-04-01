@@ -10,6 +10,7 @@ public class ANITAs_BLACKBOARD : Blackboard, IDialogSystem
     public GameObject theSweepingPoint;
     public GameObject theStoreEntrance;
     public GameObject theFrontOfDesk;
+    public GameObject theRestockPoint;
 
     public float safeRadius = 60;
     public float extraSafeRadius = 30;
@@ -71,6 +72,12 @@ public class ANITAs_BLACKBOARD : Blackboard, IDialogSystem
             case "PEACH": peaches--; peachLine.text = "x " + peaches; return true;
             default: return false;
         }
+    }
+
+    public void UpdateText()
+    {
+        appleLine.text = "x " + apples;
+        peachLine.text = "x " + peaches;         
     }
 
     public void SetUtterance (int index)
