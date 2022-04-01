@@ -40,7 +40,7 @@ public class BT_ANITA : BehaviourTree
                 new ACTION_Deactivate("theNotes"),
                 new ACTION_Utter("0", "2"),
                 new ACTION_INVOKE_POLICE(),
-                new ACTION_DebugLog()
+                new ACTION_DebugLog("Bugfixing")
                 )
             );
         root.AddChild(
@@ -60,7 +60,7 @@ public class BT_ANITA : BehaviourTree
              new ACTION_ClearUtterance(),
              new ACTION_Arrive("theRestockPoint", "20"),
              new ACTION_ReStock(),
-             new ACTION_DebugLog("saliendo?")
+             new ACTION_DebugLog("Bugfixing")
              )
          );
         root.AddChild(
