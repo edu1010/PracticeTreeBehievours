@@ -39,7 +39,8 @@ public class BT_ANITA : BehaviourTree
             new Sequence(
                 new ACTION_Deactivate("theNotes"),
                 new ACTION_Utter("0", "2"),
-                new ACTION_INVOKE_POLICE()
+                new ACTION_INVOKE_POLICE(),
+                new ACTION_DebugLog()
                 )
             );
         root.AddChild(

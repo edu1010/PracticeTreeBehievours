@@ -32,7 +32,7 @@ public class BT_POLICE : BehaviourTree
           A behaviour tree can use other behaviour trees.  
       */
         root = new Sequence(
-           new ACTION_Arrive("thief","4"),
+           new ACTION_Arrive("thief","8"),
            new ACTION_Utter("0","2"),
            new ACTION_Arrive("exitPoint")
            ,new ACTION_DESTROY()

@@ -28,6 +28,7 @@ public class BT_THIEF : BehaviourTree
             new RepeatUntilSuccessDecorator(
                 new CONDITION_InstanceNear("9", "policeTag")
                 ),
+            new ACTION_WaitForSeconds("2"),
             new ACTION_Arrive("exitPoint")//irse detenido
             ,new ACTION_DESTROY()
 
