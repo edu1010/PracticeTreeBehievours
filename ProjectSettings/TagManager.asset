@@ -9,6 +9,8 @@ TagManager:
   - FRONTDESK
   - EXIT_POINT
   - EX_CUSTOMER
+  - POLICE
+  - THIEF
   layers:
   - Default
   - TransparentFX

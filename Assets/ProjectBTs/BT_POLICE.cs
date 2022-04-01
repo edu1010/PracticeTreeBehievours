@@ -1,8 +1,8 @@
 using UnityEngine;
 using BTs;
 
-[CreateAssetMenu(fileName = "BT_THIEF", menuName = "Behaviour Trees/BT_THIEF", order = 1)]
-public class BT_THIEF : BehaviourTree
+[CreateAssetMenu(fileName = "BT_POLICE", menuName = "Behaviour Trees/BT_POLICE", order = 1)]
+public class BT_POLICE : BehaviourTree
 {
     /* If necessary declare BT parameters here. 
        All public parameters must be of type string. All public parameters must be
@@ -16,20 +16,26 @@ public class BT_THIEF : BehaviourTree
      */
 
      // construtor
-    public BT_THIEF()  { 
+    public BT_POLICE()  { 
         /* Receive BT parameters and set them. Remember all are of type string */
     }
     
     public override void OnConstruction()
     {
+        /* Write here (method OnConstruction) the code that constructs the Behaviour Tree 
+           Remember to set the root attribute to a proper node
+           e.g.
+            ...
+            root = new SEQUENCE();
+            ...
+
+          A behaviour tree can use other behaviour trees.  
+      */
         root = new Sequence(
-            new ACTION_Arrive("storeEntrance", "4"),//llegar
-            new ACTION_Utter("1", "2"),//Gritar
-            new RepeatUntilSuccessDecorator(
-                new CONDITION_InstanceNear("9", "policeTag")
-                ),
-            new ACTION_Arrive("exitPoint")//irse detenido
-            ,new ACTION_DESTROY()
+           new ACTION_Arrive("thief","4"),
+           new ACTION_Utter("0","2"),
+           new ACTION_Arrive("exitPoint")
+           ,new ACTION_DESTROY()
 
             );
     }

@@ -5,6 +5,7 @@ public class ControlScript : MonoBehaviour
 {
     private Camera cam;
     private GameObject customerPrefab;
+    public  GameObject thiefPrefab;
   
 
     // Start is called before the first frame update
@@ -23,6 +24,13 @@ public class ControlScript : MonoBehaviour
             position.z = 0;
             GameObject customer = GameObject.Instantiate(customerPrefab);
             customer.transform.position = position;
+        }
+        if (Input.GetMouseButtonDown(0) && Input.GetKey("t"))
+        {
+            var position = cam.ScreenToWorldPoint(Input.mousePosition);
+            position.z = 0;
+            GameObject thief = GameObject.Instantiate(thiefPrefab);
+            thief.transform.position = position;
         }
     }
 }

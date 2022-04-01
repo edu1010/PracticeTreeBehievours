@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 134158530}
   m_Layer: 0
   m_Name: reStockPoint
-  m_TagString: STORE_ENTRANCE
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -572,6 +572,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad491c7c6f789ad438571bcedccf665c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  thiefPrefab: {fileID: 8427011981224052344, guid: 9cbe7615dcdb83745b9714d3e9999c37, type: 3}
 --- !u!1 &577611556
 GameObject:
   m_ObjectHideFlags: 0
@@ -902,10 +903,12 @@ MonoBehaviour:
   theStoreEntrance: {fileID: 246163469}
   theFrontOfDesk: {fileID: 922145086}
   theRestockPoint: {fileID: 134158529}
+  policePrefab: {fileID: 7913613761331604085, guid: 7216e1d6ef3e69046989de107b7f38c2, type: 3}
+  policePos: {fileID: 1723971181}
   safeRadius: 60
   extraSafeRadius: 30
   utterances:
-  - unused utterance
+  - POLICE HELP ME PLSSSS
   - unused utterance
   - unused utterance
   - unused utterance
@@ -1152,6 +1155,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1723971180
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1723971181}
+  m_Layer: 0
+  m_Name: policePos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1723971181
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1723971180}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -376.4, y: 13.840474, z: -2.6117241}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1743817406
 GameObject:

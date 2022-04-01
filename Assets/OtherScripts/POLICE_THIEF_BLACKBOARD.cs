@@ -1,94 +1,40 @@
-﻿using TMPro;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-
-public class ANITAs_BLACKBOARD : Blackboard, IDialogSystem
+using TMPro;
+public class POLICE_THIEF_BLACKBOARD : Blackboard, IDialogSystem
 {
-    public int peaches = 2;
-    public int apples = 1;
-    public GameObject theBroom;
-    public GameObject theNotes;
-    public GameObject theSweepingPoint;
-    public GameObject theStoreEntrance;
-    public GameObject theFrontOfDesk;
-    public GameObject theRestockPoint;
-   // public GameObject thief;
-    public GameObject policePrefab;
-    public Transform policePos;
-    public float safeRadius = 60;
-    public float extraSafeRadius = 30;
-
     private TextMeshPro utteranceLine;
     private GameObject utteranceBubble;
-    private TextMesh peachLine, appleLine;
     private IDialogSystem partner;
-
+    public GameObject police;
+    public string policeTag = "POLICE"; 
+    public GameObject thief;
+    public GameObject exitPoint;
+    public GameObject storeEntrance;
     public string[] utterances =
-    {
-        "POLICE HELP ME PLSSSS", // 0
-        "unused utterance",
+       {
+        "YOU ARE UNDER ARREST", // POLICE
+        "GIVE ME ALL YOUR MONEY DUMMMY!",//THIEF
         "unused utterance",  // 2
-        "unused utterance", // 3
-        "unused utterance",
-        "unused utterance",//5
-        "unused utterance",//6
-        "unused utterance",
-        "unused utterance",//8
-        "unused utterance",//9
-        "It seems there's a customer",
-        "How can I help you dear customer?",//11
-        "Oh, I'm sorry we do not sell that", // 12
-        "Yes, well sell that!",
-        "Here you have!!! Enjoy it!", // 14
-        "What a pity!!! None left!",
-        "Waiting for a customer..." // 16
     };
-    
-   
-    void Start()
+    private void Start()
     {
-        theStoreEntrance = GameObject.Find("storeEntrance");
-        theFrontOfDesk = GameObject.Find("frontDesk");
         utteranceBubble = gameObject.transform.GetChild(0).gameObject;
         utteranceLine = utteranceBubble.transform.GetChild(0).GetComponent<TextMeshPro>();
-        peachLine = GameObject.Find("PEACH").transform.GetChild(0).GetComponent<TextMesh>();
-        appleLine = GameObject.Find("APPLE").transform.GetChild(0).GetComponent<TextMesh>();
-
-        peachLine.text = "x " + peaches;
-        appleLine.text = "x " + apples;
+        police = GameObject.FindGameObjectWithTag("POLICE");
+        thief = GameObject.FindGameObjectWithTag("THIEF");
+        exitPoint = GameObject.FindGameObjectWithTag("EXIT_POINT");
+        storeEntrance = GameObject.FindGameObjectWithTag("STORE_ENTRANCE");
     }
 
-    public bool CheckExistences(string item)
-    {
-        if (item == "APPLE") return apples > 0;
-        if (item == "PEACH") return peaches > 0;
-        return false;
-    }
-
-    public bool Sell(string item)
-    {
-        if (!CheckExistences(item)) return false;
-
-        switch (item)
-        {
-            case "APPLE": apples--; appleLine.text = "x " + apples; return true;
-            case "PEACH": peaches--; peachLine.text = "x " + peaches; return true;
-            default: return false;
-        }
-    }
-
-    public void UpdateText()
-    {
-        appleLine.text = "x " + apples;
-        peachLine.text = "x " + peaches;         
-    }
-
-    public void SetUtterance (int index)
+    public void SetUtterance(int index)
     {
         utteranceLine.text = utterances[index];
         utteranceBubble.SetActive(true);
     }
 
-    public void ClearUtterance ()
+    public void ClearUtterance()
     {
         utteranceLine.text = "";
         utteranceBubble.SetActive(false);
@@ -140,7 +86,7 @@ public class ANITAs_BLACKBOARD : Blackboard, IDialogSystem
 
     public string Ask(int index, bool utter)
     {
-        if (partner==null)
+        if (partner == null)
         {
             Debug.Log("Cannot ask since no partner known");
             return null;
@@ -173,3 +119,5 @@ public class ANITAs_BLACKBOARD : Blackboard, IDialogSystem
         throw new System.NotImplementedException();
     }
 }
+
+

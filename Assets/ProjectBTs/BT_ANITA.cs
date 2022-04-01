@@ -32,7 +32,16 @@ public class BT_ANITA : BehaviourTree
 
           A behaviour tree can use other behaviour trees.  
       */
-        root = new DynamicSelector();        
+        root = new DynamicSelector();
+        //Extra for police and thief behaviour
+        root.AddChild(
+            new CONDITION_ThiefInStore("theThief"),
+            new Sequence(
+                new ACTION_Deactivate("theNotes"),
+                new ACTION_Utter("0", "2"),
+                new ACTION_INVOKE_POLICE()
+                )
+            );
         root.AddChild(
             new CONDITION_CustomerInStore("theCustomer"),
             new Sequence(
