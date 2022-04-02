@@ -32,7 +32,16 @@ public class ACTION_WanderAround : Action
     public override Status OnTick ()
     {
         // write here the code to be executed every time the action is ticked
-       
+        if (SensingUtils.DistanceToTarget(gameObject, wanderAround.attractor) >= blackboard.Get<float>("safeRadius"))
+        {
+            wanderAround.seekWeight = 1.0f;                      
+        }
+        
+        if (SensingUtils.DistanceToTarget(gameObject, wanderAround.attractor) <= blackboard.Get<float>("extraSafeRadius"))
+        {
+            wanderAround.seekWeight = 0.5f;
+        }
+        
         return Status.RUNNING;
     }
 
