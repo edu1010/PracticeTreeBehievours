@@ -24,7 +24,7 @@ public class ANITAs_BLACKBOARD : Blackboard, IDialogSystem
 
     public string[] utterances =
     {
-        "POLICE HELP ME PLSSSS", // 0
+        "A THIEF! POLICE HELP ME PLEASE!", // 0
         "unused utterance",
         "unused utterance",  // 2
         "unused utterance", // 3
