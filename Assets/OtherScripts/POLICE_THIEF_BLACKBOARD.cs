@@ -14,9 +14,9 @@ public class POLICE_THIEF_BLACKBOARD : Blackboard, IDialogSystem
     public GameObject storeEntrance;
     public string[] utterances =
        {
-        "YOU ARE UNDER ARREST", // POLICE
-        "GIVE ME ALL YOUR MONEY DUMMMY!",//THIEF
-        "unused utterance",  // 2
+        "YOU ARE UNDER ARREST",
+        "GIVE ME ALL YOUR MONEY DUMMMY!",
+        "unused utterance",
     };
     private void Start()
     {
